@@ -1,0 +1,103 @@
+# ============================================================
+# Python
+# ============================================================
+
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Ambientes virtuais
+.venv/
+venv/
+env/
+ENV/
+
+# Testes, cobertura e ferramentas
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+.coverage.*
+coverage.xml
+htmlcov/
+.tox/
+.nox/
+
+# Build e distribuição
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# ============================================================
+# Configurações locais e segredos
+# ============================================================
+
+.env
+.env.*
+!.env.example
+
+*.pem
+*.key
+*.secret
+
+# Credenciais e tokens
+credentials.json
+secrets.json
+api_keys.json
+
+# ============================================================
+# Dataset e artefatos derivados
+# ============================================================
+
+# Dataset original do Zenodo
+data/raw/*
+!data/raw/.gitkeep
+
+# Corpus canônico gerado
+data/canonical/*
+!data/canonical/.gitkeep
+
+# Recortes operacionais
+data/slices/*
+!data/slices/.gitkeep
+
+# Development, validation e holdout
+data/evaluation/*
+!data/evaluation/.gitkeep
+
+# Resultados gerados pelos scripts
+outputs/*
+!outputs/.gitkeep
+
+# ============================================================
+# Arquivos temporários
+# ============================================================
+
+*.log
+*.tmp
+*.temp
+*.bak
+*.swp
+*.swo
+
+# Arquivos compactados locais
+*.zip
+*.tar
+*.tar.gz
+*.7z
+
+# ============================================================
+# Editores e sistemas operacionais
+# ============================================================
+
+.vscode/
+.idea/
+
+.DS_Store
+Thumbs.db
+desktop.ini

@@ -1,0 +1,157 @@
+project:
+  name: "Web3BlockSet Research Audit"
+  audit_version: "3.0.0"
+  purpose: "Canonicalize cross-source duplicates, audit all fields required by the research questions, create leak-resistant evaluation partitions, and validate operational slices."
+
+zenodo:
+  dataset_name: "Web3BlockSet"
+  record_id: "17576503"
+  doi: "10.5281/zenodo.17576503"
+  version: "v1"
+  expected_total_records: 391596
+  note: "Repository selection, GitHub extraction, source combination, bot-content removal, and text preprocessing are upstream dataset procedures and are not repeated here."
+
+csv:
+  encoding: "utf-8"
+  delimiter: ","
+  chunksize: 5000
+  strict_bad_lines: true
+
+columns:
+  repository: "repository"
+  owner: "owner"
+  issue_id: "issue_id"
+  issue_number: "issue_number"
+  issue_title: "issue_title"
+  issue_body: "issue_body"
+  state: "state"
+  created_at: "created_at"
+  updated_at: "updated_at"
+  closed_at: "closed_at"
+  author: "author"
+  author_id: "author_id"
+  locked: "locked"
+  comments_count: "comments_count"
+  commits_count: "commits_count"
+  labels: "labels"
+  type: "type"
+  concatenated_comments: "concatenated_comments"
+  comment_authors: "comment_authors"
+  comments_count_filtered: "comments_count_filtered"
+  repository_category: "repository_category"
+  year: "year"
+  raw_text: "raw_text"
+  clean_text: "clean_text"
+  stemmed_text: "stemmed_text"
+  data_source: "data_source"
+  owner_used: "owner_used"
+  matching_keywords: "matching_keywords"
+  matching_mandatory_keywords: "matching_mandatory_keywords"
+
+required_columns:
+  - repository
+  - owner
+  - issue_id
+  - issue_number
+  - issue_title
+  - issue_body
+  - state
+  - created_at
+  - updated_at
+  - closed_at
+  - comments_count
+  - commits_count
+  - labels
+  - type
+  - concatenated_comments
+  - comments_count_filtered
+  - repository_category
+  - raw_text
+  - clean_text
+  - stemmed_text
+  - data_source
+
+canonicalization:
+  group_column: "issue_id"
+  source_priority:
+    - provider
+    - community
+  identity_columns:
+    - owner
+    - repository
+    - issue_number
+  timestamp_columns:
+    - created_at
+    - updated_at
+    - closed_at
+  numeric_columns:
+    - comments_count
+    - comments_count_filtered
+    - commits_count
+    - year
+  list_like_columns:
+    - labels
+    - comment_authors
+    - matching_keywords
+    - matching_mandatory_keywords
+  comparison_ignore_columns:
+    - data_source
+    - owner_used
+    - matching_keywords
+    - matching_mandatory_keywords
+  completeness_columns:
+    - issue_title
+    - issue_body
+    - closed_at
+    - labels
+    - concatenated_comments
+    - comments_count_filtered
+    - commits_count
+    - repository_category
+  missing_category_label: "Unclassified"
+  conflict_policy: "fail"
+
+integrity:
+  very_short_chars: 30
+  very_long_chars: 12000
+  text_thresholds: [3000, 4000, 6000, 8000, 12000, 20000]
+  expected_slice_size: 1835
+  allow_smaller_last_slice: true
+
+research_fields:
+  expected_states: [open, closed]
+  pull_request_markers: [pull_request, pull request, pr]
+  issue_markers: [issue]
+  resolution_percentiles: [25, 50, 75, 90, 95, 99]
+  comment_percentiles: [25, 50, 75, 90, 95, 99]
+  top_labels: 250
+
+sampling:
+  seed: 42
+  smoke:
+    random_control: 10
+    pattern_enriched: 10
+    false_friend: 10
+  pilot:
+    random_control: 100
+    pattern_enriched: 100
+
+patterns:
+  pattern_candidate_regex: '(?i)\b(?:proxy|delegatecall|upgradeab|factory|oracle|reentr|checks?[- ]effects?[- ]interactions?|mutex|pausab|emergency stop|circuit breaker|access control|role[- ]based|ownable|multisig|multi[- ]signature|ipfs|off[- ]chain|state channel|commit.?reveal|zero[- ]knowledge|zk[- ]?proof|tokenization|erc[- ]?(?:20|721|1155)|packing|storage slot|create2|salt|snapshotting|genesis|migration|rate limit|speed bump|randomness|vrf|relay|meta[- ]transaction|permit|eip[- ]2612|state machine|blocklist|registry|router contract|data contract|selfdestruct|immutable|append[- ]only|homomorphic|key sharding|cold wallet|hot wallet)\b'
+  false_friend_regex: '(?i)\b(?:syncoracle|oracle|router|routing|vote|voting|signature|snapshot|checkpoint|mutex|lock|blocklist|blacklist|proxy|pattern matching|pattern not covered|function signature|test snapshot|ui snapshot|peer blocklist|network proxy)\b'
+
+partitions:
+  seed: 73
+  partition_size: 1835
+  names: [development, validation, holdout]
+  stratify_columns:
+    - repository_category_canonical
+    - type
+    - data_source
+    - year_bucket
+  year_bucket_size: 3
+  max_repository_share: 0.10
+  group_hash_column: "raw_text_sha256"
+
+output:
+  csv_encoding: "utf-8"

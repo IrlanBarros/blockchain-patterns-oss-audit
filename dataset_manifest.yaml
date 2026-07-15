@@ -1,0 +1,26 @@
+dataset:
+  name: "Web3BlockSet"
+  file: "issues_prs.csv"
+  zenodo_record: "17576503"
+  doi: "10.5281/zenodo.17576503"
+  version: "v1"
+  expected_raw_rows: 391596
+  observed_raw_sha256: null
+
+canonical_corpus:
+  file: "issues_prs_canonical.csv"
+  source_file: "issues_prs.csv"
+  rule: "One row per issue_id; duplicate source records are merged deterministically after substantive equivalence checks."
+  observed_rows: null
+  observed_sha256: null
+
+operational_slices:
+  size: 1835
+  seed: 42
+  strategy: "random"
+
+evaluation_partitions:
+  names: [development, validation, holdout]
+  target_size_each: 1835
+  seed: 73
+  leakage_group: "raw_text_sha256"
