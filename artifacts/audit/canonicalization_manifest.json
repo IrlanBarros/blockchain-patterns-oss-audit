@@ -1,0 +1,37 @@
+{
+  "generated_at_utc": "2026-07-15T17:33:37.876427+00:00",
+  "input": {
+    "path": "/home/irlan-barros/faculdade/projetos/web3blockset_audit_v3/data/raw/issues_prs.csv",
+    "size_bytes": 1904740858,
+    "modified_at_epoch": 1762815183.0,
+    "sha256": "cd1b402f43068ac2d2141a3c1ff3784dfd1569ee6932ffa70866735e2953dead"
+  },
+  "output": {
+    "path": "/home/irlan-barros/faculdade/projetos/web3blockset_audit_v3/data/canonical/issues_prs_canonical.csv",
+    "size_bytes": 1957835160,
+    "modified_at_epoch": 1784136817.870058,
+    "sha256": "bbf62adcc959b595b18145731953f18b97238dc7557c9fe80f6b679775a9a75a"
+  },
+  "raw_rows": 391596,
+  "canonical_rows": 391421,
+  "removed_duplicate_rows": 175,
+  "duplicate_group_count": 175,
+  "duplicate_input_rows": 350,
+  "substantive_conflict_comparisons": 0,
+  "identity_conflict_comparisons": 0,
+  "conflict_policy": "fail",
+  "source_priority": [
+    "provider",
+    "community"
+  ],
+  "canonical_columns_added": [
+    "repository_full_name",
+    "canonical_issue_key",
+    "repository_category_canonical",
+    "raw_text_sha256",
+    "data_sources_seen",
+    "duplicate_group_size",
+    "duplicate_resolution"
+  ],
+  "output_sha256": "bbf62adcc959b595b18145731953f18b97238dc7557c9fe80f6b679775a9a75a"
+}

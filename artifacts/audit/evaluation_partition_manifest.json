@@ -1,0 +1,19 @@
+{
+  "generated_at_utc": "2026-07-15T17:37:50.546424+00:00",
+  "input": "/home/irlan-barros/faculdade/projetos/web3blockset_audit_v3/data/canonical/issues_prs_canonical.csv",
+  "input_sha256": "bbf62adcc959b595b18145731953f18b97238dc7557c9fe80f6b679775a9a75a",
+  "partition_names": [
+    "development",
+    "validation",
+    "holdout"
+  ],
+  "partition_size": 1835,
+  "seed": 73,
+  "grouping_rule": "All identical raw_text_sha256 values remain in the same evaluation partition.",
+  "assigned_rows": {
+    "development": 1835,
+    "validation": 1835,
+    "holdout": 1835
+  },
+  "raw_text_hash_overlap_count": 0
+}

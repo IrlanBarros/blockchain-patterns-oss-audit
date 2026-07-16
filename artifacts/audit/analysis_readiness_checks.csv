@@ -1,0 +1,4 @@
+research_question,status,evidence
+RQ1_pattern_frequency,ready,raw_text present in 391421/391421 records
+RQ2_issue_activity_type,ready,2 normalized type values; labels present in 190047/391421
+RQ3_resolution_and_discussion,ready,361439 valid resolution intervals; comment text present in 240076/391421
